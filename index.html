@@ -150,6 +150,7 @@
         .img-delete-icon { cursor: pointer; color: #dc2626; font-size: 12px; margin-left: 6px; }
         .img-delete-icon:hover { color: #b91c1c; }
         
+        /* ========== MENU GRID - RESPONSIVE ========== */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -161,13 +162,13 @@
             .menu-grid { grid-template-columns: repeat(3, 1fr); }
         }
         @media (min-width: 768px) {
-            .menu-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 100%; }
+            .menu-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 100%; padding: 10px 0; }
         }
         @media (min-width: 1024px) {
-            .menu-grid { grid-template-columns: repeat(6, 1fr); gap: 14px; }
+            .menu-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; padding: 20px 0; }
         }
         @media (min-width: 1280px) {
-            .menu-grid { grid-template-columns: repeat(6, 1fr); gap: 16px; max-width: 800px; margin: 0 auto; }
+            .menu-grid { grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1300px; margin: 0 auto; }
         }
         
         .menu-grid button {
@@ -205,16 +206,22 @@
         }
         
         @media (min-width: 768px) {
-            .menu-grid button { padding: 18px 10px; min-height: 80px; }
-            .menu-grid button i { font-size: 22px; margin-bottom: 5px; }
-            .menu-grid button span { font-size: 11px; }
+            .menu-grid button { padding: 28px 16px; min-height: 140px; border-radius: 20px; }
+            .menu-grid button i { font-size: 40px; margin-bottom: 12px; }
+            .menu-grid button span { font-size: 15px; letter-spacing: 0.5px; }
         }
         @media (min-width: 1024px) {
-            .menu-grid button { padding: 20px 12px; min-height: 88px; }
-            .menu-grid button i { font-size: 24px; margin-bottom: 6px; }
-            .menu-grid button span { font-size: 12px; }
+            .menu-grid button { padding: 36px 20px; min-height: 160px; border-radius: 24px; }
+            .menu-grid button i { font-size: 48px; margin-bottom: 14px; }
+            .menu-grid button span { font-size: 17px; letter-spacing: 0.8px; }
+        }
+        @media (min-width: 1280px) {
+            .menu-grid button { padding: 42px 24px; min-height: 180px; border-radius: 28px; }
+            .menu-grid button i { font-size: 56px; margin-bottom: 16px; }
+            .menu-grid button span { font-size: 18px; }
         }
         
+        /* Developer credit */
         .developer-credit {
             text-align: center;
             font-size: 10px;
@@ -232,6 +239,25 @@
             font-weight: 600;
             color: #b91c1c;
             font-size: 11px;
+        }
+        
+        /* Desktop: fixed footer credit */
+        @media (min-width: 1024px) {
+            .developer-credit {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: 0;
+                padding: 12px 20px 14px 20px;
+                background: linear-gradient(to top, #ffffff 70%, rgba(255,255,255,0.95));
+                border-top: 2px dashed #dc2626;
+                z-index: 40;
+                font-size: 13px;
+                box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
+                backdrop-filter: blur(6px);
+            }
+            .developer-credit .phone { font-size: 14px; }
         }
         
         @media (max-width: 768px) {
@@ -345,6 +371,12 @@
             nav .container { padding-left: 12px; padding-right: 12px; }
         }
         
+        /* Desktop: add bottom padding to account for fixed footer */
+        @media (min-width: 1024px) {
+            body { padding-bottom: 70px; }
+            nav { padding-bottom: 0; }
+        }
+        
         /* Ensure all flex containers wrap properly */
         .flex-wrap-mobile { flex-wrap: wrap; }
         
@@ -392,6 +424,41 @@
             .p-4.border-b, .p-6.border-b { padding: 10px 12px !important; }
             .p-4.border-b.flex-col, .p-6.border-b.flex-col { gap: 10px; }
         }
+
+        /* user management styles */
+        .user-status-blocked { background:#fee2e2; color:#b91c1c; }
+        .user-status-active { background:#dcfce7; color:#166534; }
+
+        /* Welcome bar */
+        #welcomeBar {
+            display: none;
+            background: linear-gradient(90deg, #dc2626, #b91c1c);
+            color: white;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 45;
+            width: 100%;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+        body.logged-in #welcomeBar { display: block; }
+        @media (max-width: 640px) {
+            #welcomeBar { font-size: 12px; padding: 8px 10px; }
+        }
+
+        /* tab permission chips in user modal */
+        .tab-perm-chip {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 3px 8px; border-radius: 20px; font-size: 10px; font-weight: 600;
+            cursor: pointer; user-select: none; border: 1px solid #d1d5db;
+            background: #f9fafb; color: #374151; transition: 0.15s;
+        }
+        .tab-perm-chip.allowed { background: #dcfce7; color: #166534; border-color: #86efac; }
+        .tab-perm-chip.denied { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -406,6 +473,10 @@
             <p class="text-center text-[10px] text-gray-400 mt-4">authorised personnel only</p>
         </div>
     </div>
+
+    <!-- WELCOME MESSAGE BAR (always visible after login) -->
+    <div id="welcomeBar"></div>
+
     <button id="moveTopBtn" class="move-top-btn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
         <i class="fas fa-arrow-up"></i> <span>TOP</span>
     </button>
@@ -417,43 +488,39 @@
                 </div>
                 
                 <div id="nav-grid" class="menu-grid">
-                    <button onclick="openTab('clients')" class="bg-red-50 text-red-600 hover:bg-red-600 hover:text-white border-red-200">
+                    <button data-tab="clients" onclick="openTab('clients')" class="bg-red-50 text-red-600 hover:bg-red-600 hover:text-white border-red-200">
                         <i class="fas fa-users"></i>
                         <span>Clients</span>
                     </button>
-                    <button onclick="openTab('suppliers')" class="bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white border-blue-200">
+                    <button data-tab="suppliers" onclick="openTab('suppliers')" class="bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white border-blue-200">
                         <i class="fas fa-truck"></i>
                         <span>Supplier</span>
                     </button>
-                    <button onclick="openTab('products')" class="bg-orange-50 text-orange-600 hover:bg-orange-600 hover:text-white border-orange-200">
+                    <button data-tab="products" onclick="openTab('products')" class="bg-orange-50 text-orange-600 hover:bg-orange-600 hover:text-white border-orange-200">
                         <i class="fas fa-boxes"></i>
                         <span>Products</span>
                     </button>
-                    <button onclick="openTab('inventory')" class="bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white border-emerald-200">
-                        <i class="fas fa-warehouse"></i>
-                        <span>Inventory</span>
-                    </button>
-                    <button onclick="openTab('quotation')" class="bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white border-indigo-200">
+                    <button data-tab="quotation" onclick="openTab('quotation')" class="bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white border-indigo-200">
                         <i class="fas fa-file-alt"></i>
                         <span>Quotation</span>
                     </button>
-                    <button onclick="openTab('invoice')" class="bg-yellow-50 text-yellow-600 hover:bg-yellow-600 hover:text-white border-yellow-200">
+                    <button data-tab="invoice" onclick="openTab('invoice')" class="bg-yellow-50 text-yellow-600 hover:bg-yellow-600 hover:text-white border-yellow-200">
                         <i class="fas fa-file-invoice-dollar"></i>
                         <span>Invoice</span>
                     </button>
-                    <button onclick="openTab('delivery')" class="bg-teal-50 text-teal-600 hover:bg-teal-600 hover:text-white border-teal-200">
+                    <button data-tab="delivery" onclick="openTab('delivery')" class="bg-teal-50 text-teal-600 hover:bg-teal-600 hover:text-white border-teal-200">
                         <i class="fas fa-truck-loading"></i>
                         <span>Delivery</span>
                     </button>
-                    <button onclick="openTab('purchase')" class="bg-amber-50 text-amber-600 hover:bg-amber-600 hover:text-white border-amber-200">
+                    <button data-tab="purchase" onclick="openTab('purchase')" class="bg-amber-50 text-amber-600 hover:bg-amber-600 hover:text-white border-amber-200">
                         <i class="fas fa-clipboard-list"></i>
                         <span>Purchase</span>
                     </button>
-                    <button onclick="openTab('moneyreceipt')" class="bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white border-rose-200">
+                    <button data-tab="moneyreceipt" onclick="openTab('moneyreceipt')" class="bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white border-rose-200">
                         <i class="fas fa-receipt"></i>
                         <span>Money Receipt</span>
                     </button>
-                    <button onclick="openTab('settings')" class="bg-gray-100 text-gray-600 hover:bg-gray-600 hover:text-white border-gray-200">
+                    <button data-tab="settings" id="settingsTabBtn" onclick="openTab('settings')" class="bg-gray-100 text-gray-600 hover:bg-gray-600 hover:text-white border-gray-200">
                         <i class="fas fa-cog"></i>
                         <span>Settings</span>
                     </button>
@@ -515,35 +582,6 @@
                     <table class="w-full text-left border-collapse">
                         <thead><tr class="text-orange-600 border-b-2 border-orange-200 uppercase text-[10px] sm:text-xs"><th class="p-2 sm:p-3">SL</th><th class="p-2 sm:p-3">Items</th><th class="p-2 sm:p-3">Description</th><th class="p-2 sm:p-3">Unit</th><th class="p-2 sm:p-3">Rate</th><th class="p-2 sm:p-3">Stock Qty</th><th class="p-2 sm:p-3 text-center">Action</th></tr></thead>
                         <tbody id="productTableBody"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div id="inventory" class="tab-content bg-white">
-            <div class="flex flex-col sm:flex-row items-center p-3 sm:p-6 border-b border-emerald-100 gap-3">
-                <div class="flex-none w-full sm:w-auto"><button onclick="showDashboard()" class="btn-back flex items-center justify-center gap-2 bg-gray-100 hover:bg-emerald-600 hover:text-white px-4 py-2 rounded-full transition-all text-xs font-bold uppercase w-full sm:w-auto"><i class="fas fa-arrow-left"></i> Back</button></div>
-                <h2 class="flex-grow text-center font-bold text-emerald-700 uppercase tracking-widest text-sm sm:text-base">STOCK STATUS</h2>
-                <div class="flex-none w-[75px] hidden lg:block"></div>
-            </div>
-            <div class="p-3 sm:p-6">
-                <div class="stats-scroll-x mb-4 sm:mb-6">
-                    <div class="bg-emerald-50 p-2 sm:p-3 rounded-xl border border-emerald-100">
-                        <p class="stat-label text-emerald-600 uppercase">Total Items</p>
-                        <p id="totalInvItems" class="stat-value font-black">0</p>
-                    </div>
-                    <div class="bg-orange-50 p-2 sm:p-3 rounded-xl border border-orange-100">
-                        <p class="stat-label text-orange-600 uppercase">Low Stock</p>
-                        <p id="lowStockCount" class="stat-value font-black text-orange-600">0</p>
-                    </div>
-                    <div class="bg-red-50 p-2 sm:p-3 rounded-xl border border-red-100">
-                        <p class="stat-label text-red-600 uppercase">Out of Stock</p>
-                        <p id="outStockCount" class="stat-value font-black text-red-600">0</p>
-                    </div>
-                </div>
-                <div class="table-container bg-gray-50 rounded-xl p-2 sm:p-4 text-xs sm:text-sm">
-                    <table class="w-full text-left border-collapse">
-                        <thead><tr class="text-emerald-600 border-b-2 border-emerald-200 uppercase text-[10px] sm:text-xs"><th class="p-2 sm:p-3">Items</th><th class="p-2 sm:p-3">Description</th><th class="p-2 sm:p-3">Stock Qty</th><th class="p-2 sm:p-3">Status</th></tr></thead>
-                        <tbody id="inventoryTableBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -1024,6 +1062,73 @@
                             <div><label class="text-[10px] font-bold text-gray-500 uppercase">PO Terms</label><textarea id="termsPO" rows="3" class="w-full border rounded-lg p-2 text-xs"></textarea></div>
                         </div>
                     </div>
+                    <!-- Welcome Message Field -->
+                    <div class="lg:col-span-2 space-y-4 sm:space-y-6 bg-yellow-50 p-3 sm:p-6 rounded-2xl border border-yellow-200">
+                        <h3 class="font-bold text-yellow-800 border-b border-yellow-300 pb-2 uppercase text-[10px] sm:text-xs tracking-wider">WELCOME MESSAGE (FOR QUOTATION PDF)</h3>
+                        <div>
+                            <label class="text-[10px] font-bold text-gray-600 uppercase">Welcome Message / Cover Letter</label>
+                            <textarea id="setWelcomeMessage" rows="5" class="w-full border rounded-lg p-3 text-xs font-mono" placeholder="Enter a welcome message that will appear on the first page of every quotation PDF..."></textarea>
+                            <p class="text-[9px] text-gray-400 mt-1">This message will be printed on a separate first page, justified, with same header/footer.</p>
+                        </div>
+                    </div>
+
+                    <!-- USER MANAGEMENT SECTION -->
+                    <div class="lg:col-span-2 space-y-4 sm:space-y-6 bg-indigo-50 p-3 sm:p-6 rounded-2xl border border-indigo-200">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                            <h3 class="font-bold text-indigo-700 border-b border-indigo-300 pb-2 uppercase text-[10px] sm:text-xs tracking-wider">USER MANAGEMENT</h3>
+                            <button onclick="openUserModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-1.5 px-4 rounded-full shadow"><i class="fas fa-user-plus mr-1"></i> ADD USER</button>
+                        </div>
+                        <div class="table-container bg-white rounded-xl border border-indigo-100 p-2 sm:p-4">
+                            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                                <thead>
+                                    <tr class="text-indigo-600 border-b-2 border-indigo-200 uppercase text-[10px] sm:text-xs">
+                                        <th class="p-2 sm:p-3">#</th>
+                                        <th class="p-2 sm:p-3">Name</th>
+                                        <th class="p-2 sm:p-3">Login ID</th>
+                                        <th class="p-2 sm:p-3">Password</th>
+                                        <th class="p-2 sm:p-3">Status</th>
+                                        <th class="p-2 sm:p-3">Tabs Allowed</th>
+                                        <th class="p-2 sm:p-3 text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="userTableBody"></tbody>
+                            </table>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2">Blocked users cannot log in. Admin can edit/delete any user and control tab access per user. (Admin always has all tabs).</p>
+                    </div>
+
+                    <!-- LOGIN HISTORY SECTION -->
+                    <div class="lg:col-span-2 space-y-4 sm:space-y-6 bg-sky-50 p-3 sm:p-6 rounded-2xl border border-sky-200">
+                        <h3 class="font-bold text-sky-700 border-b border-sky-300 pb-2 uppercase text-[10px] sm:text-xs tracking-wider">LOGIN HISTORY</h3>
+                        <div class="table-container bg-white rounded-xl border border-sky-100 p-2 sm:p-4">
+                            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                                <thead>
+                                    <tr class="text-sky-700 border-b-2 border-sky-200 uppercase text-[10px] sm:text-xs">
+                                        <th class="p-2 sm:p-3">#</th>
+                                        <th class="p-2 sm:p-3">User</th>
+                                        <th class="p-2 sm:p-3">Total Logins</th>
+                                        <th class="p-2 sm:p-3">Last Login</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="loginHistorySummaryBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-[11px] sm:text-xs font-bold text-sky-700 uppercase mb-2">Detailed Login Log (Most Recent First)</h4>
+                            <div class="table-container bg-white rounded-xl border border-sky-100 p-2 sm:p-4" style="max-height:300px; overflow-y:auto;">
+                                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                                    <thead>
+                                        <tr class="text-sky-700 border-b-2 border-sky-200 uppercase text-[10px] sm:text-xs">
+                                            <th class="p-2 sm:p-3">#</th>
+                                            <th class="p-2 sm:p-3">User</th>
+                                            <th class="p-2 sm:p-3">Login Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="loginLogBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="mt-6 sm:mt-8 flex justify-center">
                     <button onclick="saveSettings()" class="bg-green-600 text-white px-6 sm:px-12 py-3 rounded-xl font-bold shadow-xl hover:bg-green-700 hover:scale-105 transition-all uppercase tracking-widest text-xs sm:text-sm w-full sm:w-auto">
@@ -1034,6 +1139,37 @@
         </div>
     </main>
     
+    <!-- USER MODAL -->
+    <div id="userModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[200] flex items-center justify-center p-2 sm:p-4">
+        <div class="bg-white rounded-2xl w-full max-w-lg max-h-[95vh] overflow-y-auto">
+            <div class="bg-indigo-600 p-3 sm:p-4 text-white flex justify-between items-center sticky top-0 z-10">
+                <h3 id="userModalTitle" class="font-bold uppercase text-sm sm:text-base">Add User</h3>
+                <button onclick="closeUserModal()" class="text-white hover:text-gray-200 text-2xl">×</button>
+            </div>
+            <form id="userForm" onsubmit="event.preventDefault(); saveUser();" class="p-4 sm:p-6 space-y-3 sm:space-y-4">
+                <input type="hidden" id="editUserIndex" value="-1">
+                <div><label class="text-[10px] font-bold text-gray-500 uppercase">Name</label><input type="text" id="userName" required class="w-full border-b-2 border-gray-200 py-1 text-sm"></div>
+                <div><label class="text-[10px] font-bold text-gray-500 uppercase">Login ID</label><input type="text" id="userLoginId" required class="w-full border-b-2 border-gray-200 py-1 text-sm"></div>
+                <div><label class="text-[10px] font-bold text-gray-500 uppercase">Password</label><input type="text" id="userPassword" required class="w-full border-b-2 border-gray-200 py-1 text-sm"></div>
+                <div>
+                    <label class="text-[10px] font-bold text-gray-500 uppercase">Status</label>
+                    <select id="userBlocked" class="w-full border-b-2 border-gray-200 py-1 text-sm">
+                        <option value="false">Active</option>
+                        <option value="true">Blocked</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-gray-500 uppercase mb-2 block">Tab Access (click to toggle)</label>
+                    <div id="tabPermissionsContainer" class="flex flex-wrap gap-2">
+                        <!-- chips inserted by JS -->
+                    </div>
+                    <p class="text-[10px] text-gray-400 mt-1">Admin always has access to all tabs. Settings tab is admin-only.</p>
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-2 rounded-lg uppercase shadow-md">Save User</button>
+            </form>
+        </div>
+    </div>
+
     <div id="itemModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[150] flex items-center justify-center p-2 sm:p-4">
         <div class="bg-white rounded-2xl w-full max-w-md max-h-[95vh] overflow-y-auto">
             <div class="bg-yellow-500 p-3 sm:p-4 text-white flex justify-between items-center sticky top-0 z-10 shadow-sm">
@@ -1320,13 +1456,51 @@
     </div>
     
     <script>
+        // ---------- CONSTANTS ----------
+        const ALL_TABS = ['clients','suppliers','products','quotation','invoice','delivery','purchase','moneyreceipt','settings'];
+        const NON_SETTINGS_TABS = ['clients','suppliers','products','quotation','invoice','delivery','purchase','moneyreceipt'];
+        const PRIMARY_ADMIN_LOGIN = '1234@';
+
         let clients = [], products = [], suppliers = [], invoices = [], quotations = [], deliveries = [], purchases = [], moneyReceipts = [];
+        let users = [];
+        let loginHistory = [];
         let settings = {};
+        let currentUser = null;
 
         let currentInvoiceItems = [], currentQuotationItems = [], currentDeliveryItems = [], currentPurchaseItems = [];
         let selectedClientIndex = -1, selectedSupplierIndex = -1;
 
+        // ---------- DEFAULT USERS ----------
+        function seedDefaultUsers() {
+            if (!localStorage.getItem('faith_users')) {
+                const defaultUsers = [
+                    { name: 'Admin', loginId: PRIMARY_ADMIN_LOGIN, password: '@1234', blocked: false, allowedTabs: ALL_TABS.slice() }
+                ];
+                localStorage.setItem('faith_users', JSON.stringify(defaultUsers));
+            } else {
+                // migrate: ensure allowedTabs exists on all users
+                let u = JSON.parse(localStorage.getItem('faith_users'));
+                let changed = false;
+                u = u.map(user => {
+                    if (!user.allowedTabs) {
+                        changed = true;
+                        if (user.loginId === PRIMARY_ADMIN_LOGIN) {
+                            user.allowedTabs = ALL_TABS.slice();
+                        } else {
+                            user.allowedTabs = NON_SETTINGS_TABS.slice();
+                        }
+                    }
+                    return user;
+                });
+                if (changed) localStorage.setItem('faith_users', JSON.stringify(u));
+            }
+        }
+
         function loadAllData() {
+            seedDefaultUsers();
+            users = JSON.parse(localStorage.getItem('faith_users')) || [];
+            loginHistory = JSON.parse(localStorage.getItem('faith_login_history')) || [];
+
             clients = JSON.parse(localStorage.getItem('faith_clients_list')) || [];
             products = JSON.parse(localStorage.getItem('faith_products_list')) || [];
             suppliers = JSON.parse(localStorage.getItem('faith_suppliers_list')) || [];
@@ -1346,8 +1520,12 @@
                 terms_quot: '1. This quotation is valid for 30 days. 2. Prices are subject to change without notice.', 
                 terms_inv: '1. Payment should be made via check/cash. 2. Goods once sold are not returnable.',
                 terms_challan: '1. Goods received in good condition. 2. Shortage claims must be made within 24 hours.',
-                terms_po: '1. Delivery must be made on or before the delivery date. 2. Payment terms: 30 days from invoice.'
+                terms_po: '1. Delivery must be made on or before the delivery date. 2. Payment terms: 30 days from invoice.',
+                welcome_message: 'Dear Valued Customer,\n\nWelcome to GUARD-TECH BD LIMITED. We are pleased to present you with this quotation for your fire safety requirements. Our team is committed to providing you with the highest quality products and services. Should you have any questions or require further clarification, please do not hesitate to contact us.\n\nThank you for considering our proposal.\n\nSincerely,\nGUARD-TECH BD LIMITED'
             };
+            if (!settings.welcome_message) {
+                settings.welcome_message = 'Dear Valued Customer,\n\nWelcome to GUARD-TECH BD LIMITED. We are pleased to present you with this quotation for your fire safety requirements. Our team is committed to providing you with the highest quality products and services. Should you have any questions or require further clarification, please do not hesitate to contact us.\n\nThank you for considering our proposal.\n\nSincerely,\nGUARD-TECH BD LIMITED';
+            }
             renderClients();
             renderProducts();
             renderSuppliers();
@@ -1356,11 +1534,15 @@
             renderSavedDeliveries();
             renderSavedPurchases();
             renderSavedMoneyReceipts();
+            renderUsers();
+            renderLoginHistory();
             loadSettingsFields();
             updateUINames();
         }
 
         function persistAll() {
+            localStorage.setItem('faith_users', JSON.stringify(users));
+            localStorage.setItem('faith_login_history', JSON.stringify(loginHistory));
             localStorage.setItem('faith_clients_list', JSON.stringify(clients));
             localStorage.setItem('faith_products_list', JSON.stringify(products));
             localStorage.setItem('faith_suppliers_list', JSON.stringify(suppliers));
@@ -1372,32 +1554,79 @@
             localStorage.setItem('faith_settings', JSON.stringify(settings));
         }
 
+        // ---------- LOGIN / LOGOUT (fast & smooth) ----------
         function performLogin() {
             const loginId = document.getElementById('loginId').value.trim();
             const loginPass = document.getElementById('loginPass').value.trim();
-            if (loginId === '1234@' && loginPass === '@1234') {
-                document.body.classList.add('logged-in');
-                localStorage.setItem('faith_logged_in', 'yes');
-                loadAllData();
-            } else {
-                alert('Invalid credentials');
-            }
+            const user = users.find(u => u.loginId === loginId && u.password === loginPass);
+            if (!user) { alert('Invalid credentials'); return; }
+            if (user.blocked) { alert('Your account is blocked. Please contact administrator.'); return; }
+
+            // record login history
+            loginHistory.push({ userName: user.name, loginId: user.loginId, timestamp: new Date().toISOString() });
+            localStorage.setItem('faith_login_history', JSON.stringify(loginHistory));
+
+            // set session
+            currentUser = user;
+            localStorage.setItem('faith_logged_in', 'yes');
+            localStorage.setItem('faith_current_user_loginid', user.loginId);
+
+            applyLoginUI();
+        }
+
+        function applyLoginUI() {
+            const loginId = localStorage.getItem('faith_current_user_loginid');
+            currentUser = users.find(u => u.loginId === loginId);
+            if (!currentUser) { logout(); return; }
+
+            document.body.classList.add('logged-in');
+            document.getElementById('loginOverlay').style.display = 'none';
+
+            const welcomeEl = document.getElementById('welcomeBar');
+            welcomeEl.innerHTML = `<i class="fas fa-user-circle mr-2"></i> Welcome, <b>${currentUser.name}</b>! You are logged in to GUARD-TECH BD LIMITED.`;
+            welcomeEl.style.display = 'block';
+
+            applyTabPermissions();
+        }
+
+        function applyTabPermissions() {
+            const isAdmin = currentUser && currentUser.loginId === PRIMARY_ADMIN_LOGIN;
+            const allowed = isAdmin ? ALL_TABS.slice() : (currentUser?.allowedTabs || NON_SETTINGS_TABS.slice());
+
+            // Hide / show nav buttons per allowed tabs
+            document.querySelectorAll('#nav-grid button[data-tab]').forEach(btn => {
+                const t = btn.getAttribute('data-tab');
+                if (allowed.includes(t)) {
+                    btn.style.display = '';
+                } else {
+                    btn.style.display = 'none';
+                }
+            });
         }
 
         function logout() {
             document.body.classList.remove('logged-in');
             localStorage.removeItem('faith_logged_in');
+            localStorage.removeItem('faith_current_user_loginid');
+            currentUser = null;
             document.getElementById('loginId').value = '';
             document.getElementById('loginPass').value = '';
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.getElementById('nav-grid').classList.remove('hidden');
             document.getElementById('moveTopBtn').style.display = 'none';
+            document.getElementById('welcomeBar').style.display = 'none';
+            document.getElementById('loginOverlay').style.display = 'flex';
         }
 
         window.onload = function() {
+            seedDefaultUsers();
+            users = JSON.parse(localStorage.getItem('faith_users')) || [];
+            loginHistory = JSON.parse(localStorage.getItem('faith_login_history')) || [];
             if (localStorage.getItem('faith_logged_in') === 'yes') {
-                document.body.classList.add('logged-in');
+                applyLoginUI();
                 loadAllData();
+            } else {
+                document.getElementById('loginOverlay').style.display = 'flex';
             }
         };
 
@@ -1414,6 +1643,22 @@
             else if (day === 2 || day === 22) suffix = 'nd';
             else if (day === 3 || day === 23) suffix = 'rd';
             return `${day}${suffix} ${month}, ${year}`;
+        }
+
+        function formatDateTime(dateStr) {
+            if (!dateStr) return 'N/A';
+            const d = new Date(dateStr);
+            if (isNaN(d.getTime())) return dateStr;
+            const day = d.getDate();
+            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            const month = monthNames[d.getMonth()];
+            const year = d.getFullYear();
+            let hours = d.getHours();
+            const minutes = String(d.getMinutes()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            return `${day} ${month} ${year}, ${hours}:${minutes} ${ampm}`;
         }
 
         function updateUINames() {
@@ -1434,6 +1679,7 @@
             document.getElementById('termsInvoice').value = settings.terms_inv || '';
             document.getElementById('termsChallan').value = settings.terms_challan || '';
             document.getElementById('termsPO').value = settings.terms_po || '';
+            document.getElementById('setWelcomeMessage').value = settings.welcome_message || '';
             if(settings.logo) document.getElementById('logoPreview').innerHTML = `<img src="${settings.logo}" class="h-full w-full object-contain">`; else document.getElementById('logoPreview').innerHTML = '<i class="fas fa-image text-gray-300"></i>';
             if(settings.seal) document.getElementById('sealPreview').innerHTML = `<img src="${settings.seal}" class="h-full w-full object-contain">`; else document.getElementById('sealPreview').innerHTML = '<i class="fas fa-stamp text-gray-300"></i>';
             if(settings.sign) document.getElementById('signPreview').innerHTML = `<img src="${settings.sign}" class="h-full w-full object-contain">`; else document.getElementById('signPreview').innerHTML = '<i class="fas fa-signature text-gray-300"></i>';
@@ -1469,6 +1715,7 @@
             settings.terms_inv = document.getElementById('termsInvoice').value;
             settings.terms_challan = document.getElementById('termsChallan').value;
             settings.terms_po = document.getElementById('termsPO').value;
+            settings.welcome_message = document.getElementById('setWelcomeMessage').value;
             const logoFile = document.getElementById('setLogo').files[0];
             const sealFile = document.getElementById('setSeal').files[0];
             const signFile = document.getElementById('setSign').files[0];
@@ -1488,24 +1735,212 @@
         });
 
         function openTab(tabId) {
+            // permission check
+            const isAdmin = currentUser && currentUser.loginId === PRIMARY_ADMIN_LOGIN;
+            const allowed = isAdmin ? ALL_TABS.slice() : (currentUser?.allowedTabs || []);
+            if (!allowed.includes(tabId)) {
+                alert('You do not have access to this tab.');
+                return;
+            }
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
+            const el = document.getElementById(tabId);
+            if (el) el.classList.add('active');
             document.getElementById('nav-grid').classList.add('hidden');
             if(tabId === 'invoice') switchInvoiceSubTab('create');
             if(tabId === 'quotation') switchQuotationSubTab('create');
             if(tabId === 'delivery') switchDeliverySubTab('create');
             if(tabId === 'purchase') switchPurchaseSubTab('create');
             if(tabId === 'moneyreceipt') switchMoneyReceiptSubTab('create');
-            if(tabId === 'inventory') renderInventory();
+            if(tabId === 'settings') { renderUsers(); renderLoginHistory(); }
             document.getElementById('moveTopBtn').style.display = 'flex';
+            if (document.body.classList.contains('logged-in')) {
+                document.getElementById('welcomeBar').style.display = 'block';
+            }
         }
 
         function showDashboard() {
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.getElementById('nav-grid').classList.remove('hidden');
             document.getElementById('moveTopBtn').style.display = 'none';
+            if (document.body.classList.contains('logged-in')) {
+                document.getElementById('welcomeBar').style.display = 'block';
+            }
         }
 
+        // ---------- USER MANAGEMENT ----------
+        function renderUsers() {
+            const tbody = document.getElementById('userTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = users.map((u, i) => {
+                const statusClass = u.blocked ? 'user-status-blocked' : 'user-status-active';
+                const statusText = u.blocked ? 'Blocked' : 'Active';
+                const isPrimary = u.loginId === PRIMARY_ADMIN_LOGIN;
+                const allowedCount = (u.allowedTabs || []).length;
+                return `<tr class="border-b">
+                    <td class="p-2 sm:p-3 font-bold">${i+1}</td>
+                    <td class="p-2 sm:p-3">${u.name}${isPrimary ? ' <span class="text-[9px] text-red-500 font-bold">(Admin)</span>' : ''}</td>
+                    <td class="p-2 sm:p-3 font-mono">${u.loginId}</td>
+                    <td class="p-2 sm:p-3 font-mono">${u.password}</td>
+                    <td class="p-2 sm:p-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${statusClass}">${statusText}</span></td>
+                    <td class="p-2 sm:p-3 text-[10px]">${isPrimary ? 'All Tabs' : allowedCount + ' / ' + NON_SETTINGS_TABS.length}</td>
+                    <td class="p-2 sm:p-3 text-center">
+                        <button onclick="editUser(${i})" class="text-blue-500 mr-1" title="Edit"><i class="fas fa-edit"></i></button>
+                        <button onclick="toggleBlockUser(${i})" class="text-amber-500 mr-1" title="${u.blocked ? 'Unblock' : 'Block'}"><i class="fas fa-${u.blocked ? 'unlock' : 'lock'}"></i></button>
+                        <button onclick="deleteUser(${i})" class="text-red-400" title="Delete"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>`;
+            }).join('');
+        }
+
+        function buildTabPermissionChips(selectedTabs, isAdminUser) {
+            const container = document.getElementById('tabPermissionsContainer');
+            if (!container) return;
+            container.innerHTML = '';
+            NON_SETTINGS_TABS.forEach(tab => {
+                const isAllowed = isAdminUser || (selectedTabs || []).includes(tab);
+                const chip = document.createElement('div');
+                chip.className = 'tab-perm-chip ' + (isAllowed ? 'allowed' : 'denied');
+                chip.setAttribute('data-tab', tab);
+                chip.innerHTML = `<i class="fas fa-${isAllowed ? 'check' : 'times'}"></i> ${tab}`;
+                if (isAdminUser) {
+                    chip.style.opacity = '0.6';
+                    chip.style.cursor = 'not-allowed';
+                } else {
+                    chip.onclick = function() {
+                        this.classList.toggle('allowed');
+                        this.classList.toggle('denied');
+                        const ok = this.classList.contains('allowed');
+                        this.innerHTML = `<i class="fas fa-${ok ? 'check' : 'times'}"></i> ${tab}`;
+                    };
+                }
+                container.appendChild(chip);
+            });
+        }
+
+        function openUserModal() {
+            document.getElementById('userModal').classList.remove('hidden');
+            document.getElementById('userModalTitle').innerText = 'Add User';
+            document.getElementById('editUserIndex').value = -1;
+            document.getElementById('userName').value = '';
+            document.getElementById('userLoginId').value = '';
+            document.getElementById('userPassword').value = '';
+            document.getElementById('userBlocked').value = 'false';
+            buildTabPermissionChips(NON_SETTINGS_TABS.slice(), false);
+        }
+
+        function closeUserModal() {
+            document.getElementById('userModal').classList.add('hidden');
+        }
+
+        function editUser(idx) {
+            const u = users[idx];
+            const isPrimary = u.loginId === PRIMARY_ADMIN_LOGIN;
+            document.getElementById('userModal').classList.remove('hidden');
+            document.getElementById('userModalTitle').innerText = 'Edit User';
+            document.getElementById('editUserIndex').value = idx;
+            document.getElementById('userName').value = u.name;
+            document.getElementById('userLoginId').value = u.loginId;
+            document.getElementById('userPassword').value = u.password;
+            document.getElementById('userBlocked').value = u.blocked ? 'true' : 'false';
+            buildTabPermissionChips(u.allowedTabs || NON_SETTINGS_TABS.slice(), isPrimary);
+        }
+
+        function saveUser() {
+            const idx = parseInt(document.getElementById('editUserIndex').value);
+            const name = document.getElementById('userName').value.trim();
+            const loginId = document.getElementById('userLoginId').value.trim();
+            const password = document.getElementById('userPassword').value.trim();
+            const blocked = document.getElementById('userBlocked').value === 'true';
+            if (!name || !loginId || !password) { alert('All fields are required'); return; }
+
+            const duplicate = users.some((u, i) => u.loginId === loginId && i !== idx);
+            if (duplicate) { alert('Login ID already exists. Please choose another.'); return; }
+
+            // collect allowed tabs from chips
+            const allowedTabs = [];
+            document.querySelectorAll('#tabPermissionsContainer .tab-perm-chip').forEach(chip => {
+                if (chip.classList.contains('allowed')) {
+                    allowedTabs.push(chip.getAttribute('data-tab'));
+                }
+            });
+
+            const isPrimary = loginId === PRIMARY_ADMIN_LOGIN;
+            const finalAllowed = isPrimary ? ALL_TABS.slice() : allowedTabs;
+
+            if (idx > -1) {
+                // prevent demoting the primary admin
+                if (users[idx].loginId === PRIMARY_ADMIN_LOGIN && !isPrimary) {
+                    alert('Cannot change primary admin login ID.');
+                    return;
+                }
+                users[idx] = { name, loginId, password, blocked, allowedTabs: finalAllowed };
+            } else {
+                users.push({ name, loginId, password, blocked, allowedTabs: finalAllowed });
+            }
+            persistAll();
+            renderUsers();
+            closeUserModal();
+            alert('User saved successfully.');
+        }
+
+        function toggleBlockUser(idx) {
+            if (users[idx].loginId === PRIMARY_ADMIN_LOGIN) {
+                alert('Cannot block primary admin.');
+                return;
+            }
+            users[idx].blocked = !users[idx].blocked;
+            persistAll();
+            renderUsers();
+        }
+
+        function deleteUser(idx) {
+            if (users[idx].loginId === PRIMARY_ADMIN_LOGIN) {
+                alert('Cannot delete primary admin.');
+                return;
+            }
+            if (users.length <= 1) { alert('Cannot delete the only user.'); return; }
+            if (!confirm('Delete this user?')) return;
+            users.splice(idx, 1);
+            persistAll();
+            renderUsers();
+        }
+
+        // ---------- LOGIN HISTORY ----------
+        function renderLoginHistory() {
+            const summaryTbody = document.getElementById('loginHistorySummaryBody');
+            if (summaryTbody) {
+                summaryTbody.innerHTML = users.map((u, i) => {
+                    const userLogs = loginHistory.filter(l => l.loginId === u.loginId);
+                    const total = userLogs.length;
+                    let lastLogin = 'Never';
+                    if (total > 0) {
+                        const sorted = userLogs.slice().sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+                        lastLogin = formatDateTime(sorted[0].timestamp);
+                    }
+                    return `<tr class="border-b">
+                        <td class="p-2 sm:p-3 font-bold">${i+1}</td>
+                        <td class="p-2 sm:p-3">${u.name} <span class="text-[10px] text-gray-400">(${u.loginId})</span></td>
+                        <td class="p-2 sm:p-3 font-bold text-sky-700">${total}</td>
+                        <td class="p-2 sm:p-3 text-xs">${lastLogin}</td>
+                    </tr>`;
+                }).join('');
+            }
+            const logTbody = document.getElementById('loginLogBody');
+            if (logTbody) {
+                const sorted = loginHistory.slice().sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+                if (sorted.length === 0) {
+                    logTbody.innerHTML = '<tr><td colspan="3" class="text-center p-4 text-gray-400">No login records yet.</td></tr>';
+                } else {
+                    logTbody.innerHTML = sorted.map((l, i) => `<tr class="border-b">
+                        <td class="p-2 sm:p-3 font-bold">${i+1}</td>
+                        <td class="p-2 sm:p-3">${l.userName} <span class="text-[10px] text-gray-400">(${l.loginId})</span></td>
+                        <td class="p-2 sm:p-3 text-xs">${formatDateTime(l.timestamp)}</td>
+                    </tr>`).join('');
+                }
+            }
+        }
+
+        // ---------- EXISTING FUNCTIONS ----------
         function toggleSupplierModal(s, idx=-1) {
             document.getElementById('supplierModal').classList.toggle('hidden', !s);
             if(s && idx > -1) {
@@ -1548,20 +1983,6 @@
         }
 
         function deleteSupp(i) { if(confirm('Delete?')) { suppliers.splice(i,1); persistAll(); renderSuppliers(); }}
-
-        function renderInventory() {
-            let low = 0, out = 0;
-            document.getElementById('inventoryTableBody').innerHTML = products.map(p => {
-                const stock = parseInt(p.stock) || 0;
-                let status = '<span class="text-green-600 font-bold">In Stock</span>';
-                if(stock <= 0) { status = '<span class="text-red-600 font-bold">Out of Stock</span>'; out++; }
-                else if(stock < 5) { status = '<span class="text-orange-600 font-bold">Low Stock</span>'; low++; }
-                return `<tr class="border-b"><td class="p-2 sm:p-3"><b>${p.item}</b></td><td class="p-2 sm:p-3 text-xs">${p.desc || ''}</td><td class="p-2 sm:p-3 font-bold">${stock} ${p.unit}</td><td class="p-2 sm:p-3 text-xs uppercase">${status}</td></tr>`;
-            }).join('');
-            document.getElementById('totalInvItems').innerText = products.length;
-            document.getElementById('lowStockCount').innerText = low;
-            document.getElementById('outStockCount').innerText = out;
-        }
 
         function switchInvoiceSubTab(sub) {
             document.querySelectorAll('.invoice-sub-tab').forEach(t => t.classList.remove('active'));
@@ -2157,29 +2578,60 @@
             const clientData = clients.find(c => c.name === quot.client) || { address: 'N/A', mobile: 'N/A' };
             const footerMargin = 20;
             const pageHeight = doc.internal.pageSize.height;
-            let currentY = 49;
             let isFirstPage = true;
-            function checkPageBreak(y, neededSpace = 10) {
-                if (y + neededSpace > pageHeight - footerMargin) { doc.addPage(); addHeaderAndFooter(); isFirstPage = false; return 49; } return y;
-            }
-            const addHeaderAndFooter = () => {
+
+            const drawHeaderFooter = (isWelcomePage = false, pageTitle = 'QUOTATION') => {
                 if(settings.logo) { try { doc.addImage(settings.logo, 'PNG', 94, 1, 22, 22); } catch(e){} }
                 doc.setFontSize(28); doc.setTextColor(204, 0, 0); doc.setFont("helvetica", "bold"); 
                 doc.text(settings.company, 105, 32, { align: "center" });
                 doc.setDrawColor(204, 0, 0); doc.setLineWidth(0.8); doc.line(14, 37, 196, 37);
-                if (isFirstPage) {
+                if (!isWelcomePage) {
                     doc.setFontSize(12); doc.setTextColor(0, 0, 255); doc.setFont("helvetica", "bold");
-                    doc.text("QUOTATION", 105, 45, { align: "center" });
+                    doc.text(pageTitle, 105, 45, { align: "center" });
                 }
                 doc.setDrawColor(204, 0, 0); doc.setLineWidth(0.8); doc.line(14, pageHeight - 22, 196, pageHeight - 22);
                 doc.setFontSize(8); doc.setTextColor(0, 0, 255); doc.setFont("helvetica", "normal"); 
                 doc.text(settings.address, 105, pageHeight - 17, { align: "center" });
-                const cl = `Mobile: ${settings.mobile || 'N/A'} | Email: ${settings.email || 'N/A'} | Website: ${settings.website || 'N/A'}`;
-                doc.text(cl, 105, pageHeight - 13, { align: "center" });
+                const contactLine = `Mobile: ${settings.mobile || 'N/A'} | Email: ${settings.email || 'N/A'} | Website: ${settings.website || 'N/A'}`;
+                doc.text(contactLine, 105, pageHeight - 13, { align: "center" });
             };
-            addHeaderAndFooter();
+
+            drawHeaderFooter(true, '');
+            const welcomeText = settings.welcome_message || 'Dear Customer,\n\nWelcome to our company. We are pleased to present you with this quotation.';
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(0, 0, 0);
+            const maxWidth = 170;
+            const lineHeight = 7;
+            const startY = 60;
+            const lines = doc.splitTextToSize(welcomeText, maxWidth);
+            let yPos = startY;
+            lines.forEach(line => {
+                if (yPos > pageHeight - footerMargin - 20) {
+                    doc.addPage();
+                    drawHeaderFooter(false, 'QUOTATION');
+                    yPos = 50;
+                }
+                doc.text(line, 20, yPos);
+                yPos += lineHeight;
+            });
+
+            doc.addPage();
+            isFirstPage = false;
+            drawHeaderFooter(false, 'QUOTATION');
+            let currentY = 49;
+
+            function checkPageBreak(y, neededSpace = 10) {
+                if (y + neededSpace > pageHeight - footerMargin) {
+                    doc.addPage(); 
+                    drawHeaderFooter(false, 'QUOTATION'); 
+                    return 49;
+                }
+                return y;
+            }
+
             doc.setFontSize(10); doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); doc.text("To,", 14, currentY); currentY += 5;
-            doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); doc.text(quot.client, 14, currentY); currentY += 5;
+            doc.setFont("helvetica", "bold"); doc.text(quot.client, 14, currentY); currentY += 5;
             doc.setFont("helvetica", "normal"); const addr = doc.splitTextToSize(clientData.address, 80); doc.text(addr, 14, currentY);
             currentY += (addr.length * 5) + 2;
             doc.setFont("helvetica", "bold"); doc.text("Quotation No:", 130, 50); doc.setFont("helvetica", "normal"); doc.text(quot.id, 160, 50);
@@ -2187,6 +2639,7 @@
             doc.setFont("helvetica", "bold"); doc.text("Ref No:", 130, 60); doc.setFont("helvetica", "normal"); doc.text(quot.refNo || 'N/A', 160, 60);
             currentY = Math.max(currentY, 73);
             if (quot.subject) { currentY = checkPageBreak(currentY, 6); doc.setFont("helvetica", "bold"); doc.text("Subject: " + quot.subject, 14, currentY, { maxWidth: 180 }); currentY += 6; }
+
             const tableData = quot.items.map((item, i) => [i + 1, item.name, item.desc || 'N/A', item.qty, item.unit || 'Pcs', item.price, item.total]);
             doc.autoTable({
                 startY: currentY, head: [['SL', 'Items', 'Description', 'Qty', 'Unit', 'Unit Price', 'Total']], body: tableData, theme: 'grid',
@@ -2195,12 +2648,7 @@
                 columnStyles: { 0: { halign: 'center' }, 3: { halign: 'center' }, 4: { halign: 'center' }, 5: { halign: 'center' }, 6: { halign: 'right' } },
                 margin: { top: 42, bottom: footerMargin + 10 },
                 didDrawPage: (data) => {
-                    if(settings.logo) { try { doc.addImage(settings.logo, 'PNG', 94, 1, 22, 22); } catch(e){} }
-                    doc.setFontSize(28); doc.setTextColor(204, 0, 0); doc.setFont("helvetica", "bold"); doc.text(settings.company, 105, 32, { align: "center" });
-                    doc.setDrawColor(204, 0, 0); doc.setLineWidth(0.8); doc.line(14, 37, 196, 37);
-                    doc.setDrawColor(204, 0, 0); doc.setLineWidth(0.8); doc.line(14, pageHeight - 22, 196, pageHeight - 22);
-                    doc.setFontSize(8); doc.setTextColor(0, 0, 255); doc.setFont("helvetica", "normal"); doc.text(settings.address, 105, pageHeight - 17, { align: "center" });
-                    const clLine = `Mobile: ${settings.mobile || 'N/A'} | Email: ${settings.email || 'N/A'} | Website: ${settings.website || 'N/A'}`; doc.text(clLine, 105, pageHeight - 13, { align: "center" });
+                    drawHeaderFooter(false, 'QUOTATION');
                 }
             });
             let finalY = doc.lastAutoTable.finalY + 6; finalY = checkPageBreak(finalY, 30);
