@@ -314,7 +314,7 @@
             width: 210mm;
             min-height: 297mm;
             font-family: 'Arial', sans-serif;
-            color: #333;
+            color: #000;
             background: #fff;
             box-sizing: border-box;
             padding: 20px;
@@ -1389,53 +1389,53 @@
     </div>
     <div id="pdf-template">
         <div id="pdf-inner-content">
-            <div id="pdf-header-container" style="text-align: center; border-bottom: 2px solid #FF0000; padding-bottom: 2px; margin-bottom: 8px;">
+            <div id="pdf-header-container" style="text-align: center; border-bottom: 2px solid #CC0000; padding-bottom: 2px; margin-bottom: 8px;">
                 <div id="pdf-logo-wrapper" style="margin-bottom: 0px; display: none; text-align: center;">
                     <img id="pdf-company-logo" style="max-height: 70px; max-width: 100px; margin: 0 auto; display: block;">
                 </div>
-                <h1 id="pdf-company-name" style="margin: 0; font-size: 26px; text-transform: uppercase; color: #FF0000; font-weight: bold; line-height: 1.1;">GUARD-TECH BD LIMITED</h1>
-                <p id="pdf-company-address" style="margin: 0; font-size: 12px; color: #0000FF; font-weight: 500; line-height: 1.2;"></p>
-                <p id="pdf-company-contact" style="margin: 0; font-size: 12px; color: #0000FF; line-height: 1.2;"></p>
+                <h1 id="pdf-company-name" style="margin: 0; font-size: 22px; text-transform: uppercase; color: #000000; font-weight: bold; line-height: 1.1;">GUARD-TECH BD LIMITED</h1>
+                <p id="pdf-company-address" style="margin: 0; font-size: 12px; color: #000000; font-weight: 500; line-height: 1.2;"></p>
+                <p id="pdf-company-contact" style="margin: 0; font-size: 12px; color: #000000; line-height: 1.2;"></p>
             </div>
-            <h2 id="pdf-receipt-title" style="text-align: center; font-size: 16pt; color: #0000FF; margin: 10px 0; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; display: inline-block; padding: 4px 20px; left: 50%; transform: translateX(-50%); position: relative;">Money Receipt</h2>
+            <h2 id="pdf-receipt-title" style="text-align: center; font-size: 16pt; color: #000000; margin: 10px 0; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; display: inline-block; padding: 4px 20px; left: 50%; transform: translateX(-50%); position: relative;">Money Receipt</h2>
             <div id="pdf-receipt-container" style="margin-top: 5px; width: 100%;">
                 <table style="width: 100%; border-collapse: collapse; margin-bottom: 12px;">
                     <tr>
                         <td style="width: 50%; padding: 8px; text-align: center;">
-                            <span style="font-size: 9px; color: #666; display: block; text-transform: uppercase; font-weight: bold;">Receipt Number</span>
-                            <span id="pdf-receipt-id" style="font-size: 13px; font-weight: bold; color: #FF0000;"></span>
+                            <span style="font-size: 9px; color: #000000; display: block; text-transform: uppercase; font-weight: bold;">Receipt Number</span>
+                            <span id="pdf-receipt-id" style="font-size: 13px; font-weight: bold; color: #000000;"></span>
                         </td>
                         <td style="width: 50%; padding: 8px; text-align: center;">
-                            <span style="font-size: 9px; color: #666; display: block; text-transform: uppercase; font-weight: bold;">Date</span>
+                            <span style="font-size: 9px; color: #000000; display: block; text-transform: uppercase; font-weight: bold;">Date</span>
                             <span id="pdf-receipt-date" style="font-size: 13px; font-weight: bold; color: #000000;"></span>
                         </td>
                     </tr>
                 </table>
-                <div style="border: 2px solid #0000FF; padding: 20px; border-radius: 4px; background: #fff;">
+                <div style="border: 2px solid #000000; padding: 20px; border-radius: 4px; background: #fff;">
                     <div style="margin-bottom: 12px; border-bottom: 1px dashed #000000; padding-bottom: 8px;">
-                        <span style="font-size: 10px; font-weight: bold; color: #0000FF;">RECEIVED FROM:</span>
+                        <span style="font-size: 10px; font-weight: bold; color: #000000;">RECEIVED FROM:</span>
                         <div id="pdf-client-name" style="font-size: 15px; font-weight: bold; margin-top: 3px; color: #000000;"></div>
                     </div>
                     <div style="margin-bottom: 12px; border-bottom: 1px dashed #000000; padding-bottom: 8px;">
-                        <span style="font-size: 10px; font-weight: bold; color: #0000FF;">ADDRESS:</span>
+                        <span style="font-size: 10px; font-weight: bold; color: #000000;">ADDRESS:</span>
                         <div id="pdf-client-address" style="font-size: 11px; margin-top: 3px; color: #000000;"></div>
                     </div>
                     <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
                         <tr>
                             <td style="padding: 10px; background: #f8fafc; border: 1px solid #000000; width: 40%;">
-                                <span style="font-size: 10px; font-weight: bold; color: #0000FF;">PAYMENT METHOD</span>
+                                <span style="font-size: 10px; font-weight: bold; color: #000000;">PAYMENT METHOD</span>
                                 <div id="pdf-payment-mode" style="font-size: 13px; font-weight: bold; margin-top: 3px; color: #000000;"></div>
-                                <div id="pdf-cheque-details" style="font-size: 9px; color: #ef4444; margin-top: 2px;"></div>
+                                <div id="pdf-cheque-details" style="font-size: 9px; color: #000000; margin-top: 2px;"></div>
                             </td>
                             <td style="padding: 10px; background: #fff5f5; border: 1px solid #000000; text-align: center;">
-                                <span style="font-size: 10px; font-weight: bold; color: #FF0000;">TOTAL AMOUNT RECEIVED</span>
-                                <div style="font-size: 11pt; font-weight: 900; color: #FF0000; margin-top: 3px;">
+                                <span style="font-size: 10px; font-weight: bold; color: #000000;">TOTAL AMOUNT RECEIVED</span>
+                                <div style="font-size: 11pt; font-weight: 900; color: #000000; margin-top: 3px;">
                                     <span id="pdf-currency">৳</span> <span id="pdf-amount"></span>
                                 </div>
                             </td>
                         </tr>
                     </table>
-                    <div style="margin-top: 20px; padding: 12px; border-left: 4px solid #0000FF; background: #f1f5f9;">
+                    <div style="margin-top: 20px; padding: 12px; border-left: 4px solid #000000; background: #f1f5f9;">
                         <span style="font-size: 9px; font-weight: bold; color: #000000; text-transform: uppercase;">Amount in Words:</span>
                         <div id="pdf-amount-words" style="font-size: 11px; font-weight: bold; color: #000000; margin-top: 3px; font-style: italic;"></div>
                     </div>
@@ -1457,12 +1457,12 @@
                 </div>
             </div>
             <div style="margin-top: 30px; text-align: center;">
-                <p style="font-size: 9px; color: #777; font-style: italic; border: 1px dashed #ccc; display: inline-block; padding: 5px 15px; border-radius: 20px;">
+                <p style="font-size: 9px; color: #000000; font-style: italic; border: 1px dashed #ccc; display: inline-block; padding: 5px 15px; border-radius: 20px;">
                     <i class="fas fa-info-circle"></i> This is a software generated money receipt & doesn't require signature.
                 </p>
             </div>
             <div id="pdf-footer" style="position: absolute; bottom: 15px; left: 20px; right: 20px; text-align: center;">
-                <div style="font-size: 11px; color: #0000FF; font-weight: bold; text-transform: uppercase; border-top: 2px solid #CC0000; padding-top: 8px; width: 80%; margin: 0 auto;" id="pdf-footer-text"></div>
+                <div style="font-size: 11px; color: #000000; font-weight: bold; text-transform: uppercase; border-top: 2px solid #CC0000; padding-top: 8px; width: 80%; margin: 0 auto;" id="pdf-footer-text"></div>
             </div>
         </div>
     </div>
@@ -1492,7 +1492,7 @@
         const NON_SETTINGS_TABS = ['clients','suppliers','products','quotation','invoice','delivery','purchase','moneyreceipt'];
         const PRIMARY_ADMIN_LOGIN = '1234@';
 
-        // ===== GLOBAL STATE (exposed on window for onclick handlers) =====
+        // ===== GLOBAL STATE =====
         window.clients = [];
         window.products = [];
         window.suppliers = [];
@@ -1535,12 +1535,10 @@
                     window.loginHistory = data.loginHistory || [];
                     window.settings = data.settings || defaultSettings();
                 } else {
-                    // first run — seed defaults
                     window.users = [{ name: 'Admin', loginId: PRIMARY_ADMIN_LOGIN, password: '@1234', blocked: false, allowedTabs: ALL_TABS.slice() }];
                     window.settings = defaultSettings();
                     await saveToFirestore();
                 }
-                // migrate missing allowedTabs
                 let migrated = false;
                 window.users = window.users.map(u => {
                     if (!u.allowedTabs) {
@@ -1557,7 +1555,6 @@
             } catch (err) {
                 console.error('Firestore load error:', err);
                 alert('Failed to load data from Firestore. Please check your Firebase setup and internet connection.');
-                // fallback defaults
                 window.users = [{ name: 'Admin', loginId: PRIMARY_ADMIN_LOGIN, password: '@1234', blocked: false, allowedTabs: ALL_TABS.slice() }];
                 window.settings = defaultSettings();
             } finally {
@@ -1610,7 +1607,7 @@
             if (show) el.classList.add('show'); else el.classList.remove('show');
         }
 
-        // ===== HELPER: format numbers to words, dates etc =====
+        // ===== HELPERS =====
         function formatFriendlyDate(dateStr) {
             if (!dateStr) return 'N/A';
             const date = new Date(dateStr);
@@ -2972,15 +2969,15 @@
             }
             const addHeaderAndFooter = () => {
                 if(window.settings.logo) { try { doc.addImage(window.settings.logo, 'PNG', 94, 1, 22, 22); } catch(e){} }
-                doc.setFontSize(28); doc.setTextColor(204, 0, 0); doc.setFont("helvetica", "bold");
+                doc.setFontSize(24); doc.setTextColor(0, 0, 0); doc.setFont("helvetica", "bold");
                 doc.text(window.settings.company, 105, 32, { align: "center" });
                 doc.setDrawColor(204, 0, 0); doc.setLineWidth(0.8); doc.line(14, 37, 196, 37);
                 if (isFirstPage) {
-                    doc.setFontSize(12); doc.setTextColor(0, 0, 255); doc.setFont("helvetica", "bold");
+                    doc.setFontSize(12); doc.setTextColor(0, 0, 0); doc.setFont("helvetica", "bold");
                     doc.text("INVOICE", 105, 45, { align: "center" });
                 }
                 doc.setDrawColor(204, 0, 0); doc.setLineWidth(0.8); doc.line(14, pageHeight - 22, 196, pageHeight - 22);
-                doc.setFontSize(8); doc.setTextColor(0, 0, 255); doc.setFont("helvetica", "normal");
+                doc.setFontSize(8); doc.setTextColor(0, 0, 0); doc.setFont("helvetica", "normal");
                 doc.text(window.settings.address, 105, pageHeight - 17, { align: "center" });
                 const contactLine = `Mobile: ${window.settings.mobile || 'N/A'} | Email: ${window.settings.email || 'N/A'} | Website: ${window.settings.website || 'N/A'}`;
                 doc.text(contactLine, 105, pageHeight - 13, { align: "center" });
@@ -3035,15 +3032,15 @@
 
             const drawHeaderFooter = (isWelcomePage = false, pageTitle = 'QUOTATION') => {
                 if(window.settings.logo) { try { doc.addImage(window.settings.logo, 'PNG', 94, 1, 22, 22); } catch(e){} }
-                doc.setFontSize(28); doc.setTextColor(204, 0, 0); doc.setFont("helvetica", "bold");
+                doc.setFontSize(24); doc.setTextColor(0, 0, 0); doc.setFont("helvetica", "bold");
                 doc.text(window.settings.company, 105, 32, { align: "center" });
                 doc.setDrawColor(204, 0, 0); doc.setLineWidth(0.8); doc.line(14, 37, 196, 37);
                 if (!isWelcomePage) {
-                    doc.setFontSize(12); doc.setTextColor(0, 0, 255); doc.setFont("helvetica", "bold");
+                    doc.setFontSize(12); doc.setTextColor(0, 0, 0); doc.setFont("helvetica", "bold");
                     doc.text(pageTitle, 105, 45, { align: "center" });
                 }
                 doc.setDrawColor(204, 0, 0); doc.setLineWidth(0.8); doc.line(14, pageHeight - 22, 196, pageHeight - 22);
-                doc.setFontSize(8); doc.setTextColor(0, 0, 255); doc.setFont("helvetica", "normal");
+                doc.setFontSize(8); doc.setTextColor(0, 0, 0); doc.setFont("helvetica", "normal");
                 doc.text(window.settings.address, 105, pageHeight - 17, { align: "center" });
                 const contactLine = `Mobile: ${window.settings.mobile || 'N/A'} | Email: ${window.settings.email || 'N/A'} | Website: ${window.settings.website || 'N/A'}`;
                 doc.text(contactLine, 105, pageHeight - 13, { align: "center" });
@@ -3130,15 +3127,15 @@
             }
             const addHeaderAndFooter = () => {
                 if(window.settings.logo) { try { doc.addImage(window.settings.logo, 'PNG', 94, 1, 22, 22); } catch(e){} }
-                doc.setFontSize(28); doc.setTextColor(204, 0, 0); doc.setFont("helvetica", "bold");
+                doc.setFontSize(24); doc.setTextColor(0, 0, 0); doc.setFont("helvetica", "bold");
                 doc.text(window.settings.company, 105, 32, { align: "center" });
                 doc.setDrawColor(204, 0, 0); doc.setLineWidth(0.8); doc.line(14, 37, 196, 37);
                 if (isFirstPage) {
-                    doc.setFontSize(12); doc.setTextColor(0, 0, 255); doc.setFont("helvetica", "bold");
+                    doc.setFontSize(12); doc.setTextColor(0, 0, 0); doc.setFont("helvetica", "bold");
                     doc.text("DELIVERY CHALLAN", 105, 45, { align: "center" });
                 }
                 doc.setDrawColor(204, 0, 0); doc.setLineWidth(0.8); doc.line(14, pageHeight - 22, 196, pageHeight - 22);
-                doc.setFontSize(8); doc.setTextColor(0, 0, 255); doc.setFont("helvetica", "normal");
+                doc.setFontSize(8); doc.setTextColor(0, 0, 0); doc.setFont("helvetica", "normal");
                 doc.text(window.settings.address, 105, pageHeight - 17, { align: "center" });
                 const clLine = `Mobile: ${window.settings.mobile || 'N/A'} | Email: ${window.settings.email || 'N/A'} | Website: ${window.settings.website || 'N/A'}`;
                 doc.text(clLine, 105, pageHeight - 13, { align: "center" });
@@ -3191,13 +3188,13 @@
             }
             const addHeaderAndFooter = () => {
                 if(window.settings.logo) { try { doc.addImage(window.settings.logo, 'PNG', 94, 1, 22, 22); } catch(e){} }
-                doc.setFontSize(28); doc.setTextColor(204, 0, 0); doc.setFont("helvetica", "bold"); doc.text(window.settings.company, 105, 32, { align: "center" });
+                doc.setFontSize(24); doc.setTextColor(0, 0, 0); doc.setFont("helvetica", "bold"); doc.text(window.settings.company, 105, 32, { align: "center" });
                 doc.setDrawColor(204, 0, 0); doc.setLineWidth(0.8); doc.line(14, 37, 196, 37);
                 if (isFirstPage) {
-                    doc.setFontSize(12); doc.setTextColor(0, 0, 255); doc.setFont("helvetica", "bold"); doc.text("PURCHASE ORDER", 105, 45, { align: "center" });
+                    doc.setFontSize(12); doc.setTextColor(0, 0, 0); doc.setFont("helvetica", "bold"); doc.text("PURCHASE ORDER", 105, 45, { align: "center" });
                 }
                 doc.setDrawColor(204, 0, 0); doc.setLineWidth(0.8); doc.line(14, pageHeight - 22, 196, pageHeight - 22);
-                doc.setFontSize(8); doc.setTextColor(0, 0, 255); doc.setFont("helvetica", "normal"); doc.text(window.settings.address, 105, pageHeight - 17, { align: "center" });
+                doc.setFontSize(8); doc.setTextColor(0, 0, 0); doc.setFont("helvetica", "normal"); doc.text(window.settings.address, 105, pageHeight - 17, { align: "center" });
                 const cl = `Mobile: ${window.settings.mobile || 'N/A'} | Email: ${window.settings.email || 'N/A'} | Website: ${window.settings.website || 'N/A'}`; doc.text(cl, 105, pageHeight - 13, { align: "center" });
             };
             addHeaderAndFooter();
