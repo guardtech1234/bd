@@ -472,6 +472,17 @@
             border-radius: 50%; animation: spin 0.8s linear infinite;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* item action buttons */
+        .item-action-btn { padding: 4px 6px; border-radius: 4px; transition: 0.15s; }
+        .item-action-btn.edit { color: #2563eb; }
+        .item-action-btn.edit:hover { background: #dbeafe; }
+        .item-action-btn.remove { color: #dc2626; }
+        .item-action-btn.remove:hover { background: #fee2e2; }
+        .edit-mode-badge {
+            display: inline-block; background:#fef3c7; color:#92400e; font-size:10px;
+            padding:2px 8px; border-radius:10px; font-weight:700; margin-left:6px;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -1185,7 +1196,7 @@
     <div id="itemModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[150] flex items-center justify-center p-2 sm:p-4">
         <div class="bg-white rounded-2xl w-full max-w-md max-h-[95vh] overflow-y-auto">
             <div class="bg-yellow-500 p-3 sm:p-4 text-white flex justify-between items-center sticky top-0 z-10 shadow-sm">
-                <h3 class="font-bold uppercase tracking-tight text-sm sm:text-base">Add Billing Item</h3>
+                <h3 id="itemModalTitle" class="font-bold uppercase tracking-tight text-sm sm:text-base">Add Billing Item</h3>
                 <button onclick="toggleItemModal(false)" class="text-white hover:text-gray-200 text-2xl sm:text-3xl leading-none">×</button>
             </div>
             <form id="itemForm" onsubmit="event.preventDefault(); addItemToInvoice();" class="p-4 sm:p-5 md:p-6 item-modal-grid">
@@ -1218,14 +1229,15 @@
                         <input type="text" id="itemTotal" readonly class="w-full border-b-2 bg-gray-50 py-2 sm:py-3 text-sm md:text-base font-black text-yellow-600">
                     </div>
                 </div>
-                <button type="submit" class="w-full bg-yellow-500 text-white font-black py-3 sm:py-4 rounded-xl uppercase shadow-lg hover:bg-yellow-600 active:scale-95 transition-all text-xs sm:text-sm tracking-widest"><i class="fas fa-plus-circle mr-2"></i> Add to Invoice</button>
+                <button type="submit" id="itemModalSubmitBtn" class="w-full bg-yellow-500 text-white font-black py-3 sm:py-4 rounded-xl uppercase shadow-lg hover:bg-yellow-600 active:scale-95 transition-all text-xs sm:text-sm tracking-widest"><i class="fas fa-plus-circle mr-2"></i> Add to Invoice</button>
+                <button type="button" id="itemModalCancelEditBtn" onclick="cancelItemEdit()" class="hidden w-full mt-2 bg-gray-100 text-gray-600 font-bold py-2 rounded-lg uppercase text-xs">Cancel Edit</button>
             </form>
         </div>
     </div>
     <div id="quotItemModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[150] flex items-center justify-center p-2 sm:p-4">
         <div class="bg-white rounded-2xl w-full max-w-md max-h-[95vh] overflow-y-auto">
             <div class="bg-indigo-500 p-3 sm:p-4 text-white flex justify-between items-center sticky top-0 z-10 shadow-sm">
-                <h3 class="font-bold uppercase tracking-tight text-sm sm:text-base">Add Quotation Item</h3>
+                <h3 id="quotItemModalTitle" class="font-bold uppercase tracking-tight text-sm sm:text-base">Add Quotation Item</h3>
                 <button onclick="toggleQuotItemModal(false)" class="text-white hover:text-gray-200 text-2xl sm:text-3xl leading-none">×</button>
             </div>
             <form id="quotItemForm" onsubmit="event.preventDefault(); addItemToQuotation();" class="p-4 sm:p-5 md:p-6 item-modal-grid">
@@ -1258,7 +1270,8 @@
                         <input type="text" id="quotItemTotal" readonly class="w-full border-b-2 bg-gray-50 py-2 sm:py-3 text-sm md:text-base font-black text-indigo-600">
                     </div>
                 </div>
-                <button type="submit" class="w-full bg-indigo-500 text-white font-black py-3 sm:py-4 rounded-xl uppercase shadow-lg hover:bg-indigo-600 active:scale-95 transition-all text-xs sm:text-sm tracking-widest"><i class="fas fa-plus-circle mr-2"></i> Add to Quotation</button>
+                <button type="submit" id="quotItemModalSubmitBtn" class="w-full bg-indigo-500 text-white font-black py-3 sm:py-4 rounded-xl uppercase shadow-lg hover:bg-indigo-600 active:scale-95 transition-all text-xs sm:text-sm tracking-widest"><i class="fas fa-plus-circle mr-2"></i> Add to Quotation</button>
+                <button type="button" id="quotItemModalCancelEditBtn" onclick="cancelQuotItemEdit()" class="hidden w-full mt-2 bg-gray-100 text-gray-600 font-bold py-2 rounded-lg uppercase text-xs">Cancel Edit</button>
             </form>
         </div>
     </div>
@@ -1293,7 +1306,7 @@
     <div id="purItemModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[150] flex items-center justify-center p-2 sm:p-4">
         <div class="bg-white rounded-2xl w-full max-w-md max-h-[95vh] overflow-y-auto">
             <div class="bg-amber-500 p-3 sm:p-4 text-white flex justify-between items-center sticky top-0 z-10 shadow-sm">
-                <h3 class="font-bold uppercase tracking-tight text-sm sm:text-base">Add Purchase Item</h3>
+                <h3 id="purItemModalTitle" class="font-bold uppercase tracking-tight text-sm sm:text-base">Add Purchase Item</h3>
                 <button onclick="togglePurItemModal(false)" class="text-white hover:text-gray-200 text-2xl sm:text-3xl leading-none">×</button>
             </div>
             <form id="purItemForm" onsubmit="event.preventDefault(); addItemToPurchase();" class="p-4 sm:p-5 md:p-6 item-modal-grid">
@@ -1326,7 +1339,8 @@
                         <input type="text" id="purItemTotal" readonly class="w-full border-b-2 bg-gray-50 py-2 sm:py-3 text-sm md:text-base font-black text-amber-600">
                     </div>
                 </div>
-                <button type="submit" class="w-full bg-amber-500 text-white font-black py-3 sm:py-4 rounded-xl uppercase shadow-lg hover:bg-amber-600 active:scale-95 transition-all text-xs sm:text-sm tracking-widest"><i class="fas fa-cart-plus mr-2"></i> Add to PO</button>
+                <button type="submit" id="purItemModalSubmitBtn" class="w-full bg-amber-500 text-white font-black py-3 sm:py-4 rounded-xl uppercase shadow-lg hover:bg-amber-600 active:scale-95 transition-all text-xs sm:text-sm tracking-widest"><i class="fas fa-cart-plus mr-2"></i> Add to PO</button>
+                <button type="button" id="purItemModalCancelEditBtn" onclick="cancelPurItemEdit()" class="hidden w-full mt-2 bg-gray-100 text-gray-600 font-bold py-2 rounded-lg uppercase text-xs">Cancel Edit</button>
             </form>
         </div>
     </div>
@@ -1512,6 +1526,11 @@
         window.currentPurchaseItems = [];
         window.selectedClientIndex = -1;
         window.selectedSupplierIndex = -1;
+
+        // ===== ITEM EDIT INDEXES =====
+        let editInvoiceItemIndex = -1;
+        let editQuotationItemIndex = -1;
+        let editPurchaseItemIndex = -1;
 
         // ===== FIRESTORE HELPERS =====
         const DOC_ID = 'guardtech_main';
@@ -2198,20 +2217,31 @@
             window.selectedClientIndex = -1;
             window.currentInvoiceItems = [];
             document.getElementById('invPaid').value = 0;
+            editInvoiceItemIndex = -1;
+            resetInvoiceItemModal();
             window.renderInvoiceItems();
         }
         window.initInvoiceFields = initInvoiceFields;
 
+        function resetInvoiceItemModal() {
+            document.getElementById('itemModalTitle').innerText = 'Add Billing Item';
+            document.getElementById('itemModalSubmitBtn').innerHTML = '<i class="fas fa-plus-circle mr-2"></i> Add to Invoice';
+            document.getElementById('itemModalCancelEditBtn').classList.add('hidden');
+        }
+
         window.toggleItemModal = function(s) {
             document.getElementById('itemModal').classList.toggle('hidden', !s);
             if(s) {
-                document.getElementById('itemForm').reset();
-                document.getElementById('invProductInput').value = "";
-                document.getElementById('itemDesc').value = "";
-                document.getElementById('itemUnit').value = "";
-                document.getElementById('itemPrice').value = "";
-                document.getElementById('itemQty').value = "1";
-                document.getElementById('itemTotal').value = "0.00";
+                if (editInvoiceItemIndex === -1) {
+                    document.getElementById('itemForm').reset();
+                    document.getElementById('invProductInput').value = "";
+                    document.getElementById('itemDesc').value = "";
+                    document.getElementById('itemUnit').value = "";
+                    document.getElementById('itemPrice').value = "";
+                    document.getElementById('itemQty').value = "1";
+                    document.getElementById('itemTotal').value = "0.00";
+                    resetInvoiceItemModal();
+                }
             }
         };
 
@@ -2223,14 +2253,48 @@
             const qty = parseFloat(document.getElementById('itemQty').value) || 0;
             const price = parseFloat(document.getElementById('itemPrice').value) || 0;
             if(qty <= 0 || price <= 0) return alert("Qty and Price must be positive");
-            window.currentInvoiceItems.push({ name, desc: document.getElementById('itemDesc').value || '', unit: document.getElementById('itemUnit').value || 'Pcs', qty, price, total: (qty * price).toFixed(2) });
+            const item = { name, desc: document.getElementById('itemDesc').value || '', unit: document.getElementById('itemUnit').value || 'Pcs', qty, price, total: (qty * price).toFixed(2) };
+            if (editInvoiceItemIndex > -1) {
+                window.currentInvoiceItems[editInvoiceItemIndex] = item;
+                editInvoiceItemIndex = -1;
+            } else {
+                window.currentInvoiceItems.push(item);
+            }
             window.renderInvoiceItems();
             window.toggleItemModal(false);
+            resetInvoiceItemModal();
+        };
+
+        window.editInvoiceItem = function(i) {
+            const it = window.currentInvoiceItems[i];
+            editInvoiceItemIndex = i;
+            document.getElementById('itemModalTitle').innerText = 'Edit Billing Item';
+            document.getElementById('itemModalSubmitBtn').innerHTML = '<i class="fas fa-save mr-2"></i> Update Item';
+            document.getElementById('itemModalCancelEditBtn').classList.remove('hidden');
+            document.getElementById('invProductInput').value = it.name;
+            document.getElementById('itemDesc').value = it.desc || '';
+            document.getElementById('itemUnit').value = it.unit || 'Pcs';
+            document.getElementById('itemPrice').value = it.price;
+            document.getElementById('itemQty').value = it.qty;
+            document.getElementById('itemTotal').value = it.total;
+            document.getElementById('itemModal').classList.remove('hidden');
+        };
+
+        window.cancelItemEdit = function() {
+            editInvoiceItemIndex = -1;
+            document.getElementById('itemForm').reset();
+            document.getElementById('invProductInput').value = "";
+            document.getElementById('itemDesc').value = "";
+            document.getElementById('itemUnit').value = "";
+            document.getElementById('itemPrice').value = "";
+            document.getElementById('itemQty').value = "1";
+            document.getElementById('itemTotal').value = "0.00";
+            resetInvoiceItemModal();
         };
 
         window.renderInvoiceItems = function() {
             let g = 0;
-            document.getElementById('invoiceItemsBody').innerHTML = window.currentInvoiceItems.map((it, i) => { g += parseFloat(it.total); return `<tr class="border-b"><td class="p-2 sm:p-3">${i+1}</td><td class="p-2 sm:p-3"><b>${it.name}</b></td><td class="p-2 sm:p-3">${it.qty}</td><td class="p-2 sm:p-3">${it.price}</td><td class="p-2 sm:p-3 font-bold">${it.total}</td><td class="p-2 sm:p-3 text-center"><button onclick="removeItemFromInv(${i})" class="text-red-400 hover:text-red-600"><i class="fas fa-times"></i></button></td></tr>`; }).join('');
+            document.getElementById('invoiceItemsBody').innerHTML = window.currentInvoiceItems.map((it, i) => { g += parseFloat(it.total); return `<tr class="border-b"><td class="p-2 sm:p-3">${i+1}</td><td class="p-2 sm:p-3"><b>${it.name}</b></td><td class="p-2 sm:p-3">${it.qty}</td><td class="p-2 sm:p-3">${it.price}</td><td class="p-2 sm:p-3 font-bold">${it.total}</td><td class="p-2 sm:p-3 text-center whitespace-nowrap"><button onclick="editInvoiceItem(${i})" class="item-action-btn edit mr-1" title="Edit"><i class="fas fa-pen"></i></button><button onclick="removeItemFromInv(${i})" class="item-action-btn remove" title="Remove"><i class="fas fa-times"></i></button></td></tr>`; }).join('');
             document.getElementById('invGrandTotal').innerText = g.toFixed(2);
             window.calculateBalance();
         };
@@ -2281,6 +2345,8 @@
             window.currentInvoiceItems = JSON.parse(JSON.stringify(inv.items));
             document.getElementById('invPaid').value = inv.paid || 0;
             document.getElementById('saveInvoiceBtn').innerText = "UPDATE INVOICE";
+            editInvoiceItemIndex = -1;
+            resetInvoiceItemModal();
             window.renderInvoiceItems(); window.switchInvoiceSubTab('create');
         };
 
@@ -2321,20 +2387,31 @@
             window.currentQuotationItems = [];
             document.getElementById('quotVat').value = 0;
             document.getElementById('quotAit').value = 0;
+            editQuotationItemIndex = -1;
+            resetQuotItemModal();
             window.renderQuotationItems();
         }
         window.initQuotationFields = initQuotationFields;
 
+        function resetQuotItemModal() {
+            document.getElementById('quotItemModalTitle').innerText = 'Add Quotation Item';
+            document.getElementById('quotItemModalSubmitBtn').innerHTML = '<i class="fas fa-plus-circle mr-2"></i> Add to Quotation';
+            document.getElementById('quotItemModalCancelEditBtn').classList.add('hidden');
+        }
+
         window.toggleQuotItemModal = function(s) {
             document.getElementById('quotItemModal').classList.toggle('hidden', !s);
             if(s) {
-                document.getElementById('quotItemForm').reset();
-                document.getElementById('quotProductInput').value = "";
-                document.getElementById('quotItemDesc').value = "";
-                document.getElementById('quotItemUnit').value = "";
-                document.getElementById('quotItemPrice').value = "";
-                document.getElementById('quotItemQty').value = "1";
-                document.getElementById('quotItemTotal').value = "0.00";
+                if (editQuotationItemIndex === -1) {
+                    document.getElementById('quotItemForm').reset();
+                    document.getElementById('quotProductInput').value = "";
+                    document.getElementById('quotItemDesc').value = "";
+                    document.getElementById('quotItemUnit').value = "";
+                    document.getElementById('quotItemPrice').value = "";
+                    document.getElementById('quotItemQty').value = "1";
+                    document.getElementById('quotItemTotal').value = "0.00";
+                    resetQuotItemModal();
+                }
             }
         };
 
@@ -2346,13 +2423,47 @@
             const qty = parseFloat(document.getElementById('quotItemQty').value) || 0;
             const price = parseFloat(document.getElementById('quotItemPrice').value) || 0;
             if(qty <= 0 || price <= 0) return alert("Qty and Price must be positive");
-            window.currentQuotationItems.push({ name, desc: document.getElementById('quotItemDesc').value || '', unit: document.getElementById('quotItemUnit').value || 'Pcs', qty, price, total: (qty * price).toFixed(2) });
+            const item = { name, desc: document.getElementById('quotItemDesc').value || '', unit: document.getElementById('quotItemUnit').value || 'Pcs', qty, price, total: (qty * price).toFixed(2) };
+            if (editQuotationItemIndex > -1) {
+                window.currentQuotationItems[editQuotationItemIndex] = item;
+                editQuotationItemIndex = -1;
+            } else {
+                window.currentQuotationItems.push(item);
+            }
             window.renderQuotationItems(); window.toggleQuotItemModal(false);
+            resetQuotItemModal();
+        };
+
+        window.editQuotationItem = function(i) {
+            const it = window.currentQuotationItems[i];
+            editQuotationItemIndex = i;
+            document.getElementById('quotItemModalTitle').innerText = 'Edit Quotation Item';
+            document.getElementById('quotItemModalSubmitBtn').innerHTML = '<i class="fas fa-save mr-2"></i> Update Item';
+            document.getElementById('quotItemModalCancelEditBtn').classList.remove('hidden');
+            document.getElementById('quotProductInput').value = it.name;
+            document.getElementById('quotItemDesc').value = it.desc || '';
+            document.getElementById('quotItemUnit').value = it.unit || 'Pcs';
+            document.getElementById('quotItemPrice').value = it.price;
+            document.getElementById('quotItemQty').value = it.qty;
+            document.getElementById('quotItemTotal').value = it.total;
+            document.getElementById('quotItemModal').classList.remove('hidden');
+        };
+
+        window.cancelQuotItemEdit = function() {
+            editQuotationItemIndex = -1;
+            document.getElementById('quotItemForm').reset();
+            document.getElementById('quotProductInput').value = "";
+            document.getElementById('quotItemDesc').value = "";
+            document.getElementById('quotItemUnit').value = "";
+            document.getElementById('quotItemPrice').value = "";
+            document.getElementById('quotItemQty').value = "1";
+            document.getElementById('quotItemTotal').value = "0.00";
+            resetQuotItemModal();
         };
 
         window.renderQuotationItems = function() {
             let g = 0;
-            document.getElementById('quotationItemsBody').innerHTML = window.currentQuotationItems.map((it, i) => { g += parseFloat(it.total); return `<tr class="border-b"><td class="p-2 sm:p-3">${i+1}</td><td class="p-2 sm:p-3"><b>${it.name}</b></td><td class="p-2 sm:p-3">${it.desc}</td><td class="p-2 sm:p-3">${it.qty}</td><td class="p-2 sm:p-3">${it.price}</td><td class="p-2 sm:p-3 font-bold">${it.total}</td><td class="p-2 sm:p-3"><button onclick="removeQuotItem(${i})" class="text-red-400"><i class="fas fa-times"></i></button></td></tr>`; }).join('');
+            document.getElementById('quotationItemsBody').innerHTML = window.currentQuotationItems.map((it, i) => { g += parseFloat(it.total); return `<tr class="border-b"><td class="p-2 sm:p-3">${i+1}</td><td class="p-2 sm:p-3"><b>${it.name}</b></td><td class="p-2 sm:p-3">${it.desc}</td><td class="p-2 sm:p-3">${it.qty}</td><td class="p-2 sm:p-3">${it.price}</td><td class="p-2 sm:p-3 font-bold">${it.total}</td><td class="p-2 sm:p-3 whitespace-nowrap"><button onclick="editQuotationItem(${i})" class="item-action-btn edit mr-1" title="Edit"><i class="fas fa-pen"></i></button><button onclick="removeQuotItem(${i})" class="item-action-btn remove" title="Remove"><i class="fas fa-times"></i></button></td></tr>`; }).join('');
             document.getElementById('quotGrandTotal').innerText = g.toFixed(2);
             window.calculateQuotTotal();
         };
@@ -2410,6 +2521,8 @@
             document.getElementById('invAddress').value = c ? c.address : "N/A";
             document.getElementById('invPaid').value = 0; document.getElementById('editInvoiceIndex').value = "-1";
             document.getElementById('saveInvoiceBtn').innerText = "SAVE INVOICE";
+            editInvoiceItemIndex = -1;
+            resetInvoiceItemModal();
             window.renderInvoiceItems(); window.openTab('invoice'); window.switchInvoiceSubTab('create');
         };
 
@@ -2442,6 +2555,8 @@
             document.getElementById('quotVat').value = quot.vat || 0;
             document.getElementById('quotAit').value = quot.ait || 0;
             document.getElementById('saveQuotationBtn').innerText = "UPDATE QUOTATION";
+            editQuotationItemIndex = -1;
+            resetQuotItemModal();
             window.renderQuotationItems(); window.switchQuotationSubTab('create');
         };
 
@@ -2586,20 +2701,32 @@
             document.getElementById('purAddress').value = "";
             document.getElementById('editPurchaseIndex').value = "-1";
             document.getElementById('savePurchaseBtn').innerText = "SAVE PO";
-            window.selectedSupplierIndex = -1; window.currentPurchaseItems = []; window.renderPurchaseItems();
+            window.selectedSupplierIndex = -1; window.currentPurchaseItems = [];
+            editPurchaseItemIndex = -1;
+            resetPurItemModal();
+            window.renderPurchaseItems();
         }
         window.initPurchaseFields = initPurchaseFields;
+
+        function resetPurItemModal() {
+            document.getElementById('purItemModalTitle').innerText = 'Add Purchase Item';
+            document.getElementById('purItemModalSubmitBtn').innerHTML = '<i class="fas fa-cart-plus mr-2"></i> Add to PO';
+            document.getElementById('purItemModalCancelEditBtn').classList.add('hidden');
+        }
 
         window.togglePurItemModal = function(s) {
             document.getElementById('purItemModal').classList.toggle('hidden', !s);
             if(s) {
-                document.getElementById('purItemForm').reset();
-                document.getElementById('purProductInput').value = "";
-                document.getElementById('purItemDesc').value = "";
-                document.getElementById('purItemUnit').value = "";
-                document.getElementById('purItemPrice').value = "";
-                document.getElementById('purItemQty').value = "1";
-                document.getElementById('purItemTotal').value = "0.00";
+                if (editPurchaseItemIndex === -1) {
+                    document.getElementById('purItemForm').reset();
+                    document.getElementById('purProductInput').value = "";
+                    document.getElementById('purItemDesc').value = "";
+                    document.getElementById('purItemUnit').value = "";
+                    document.getElementById('purItemPrice').value = "";
+                    document.getElementById('purItemQty').value = "1";
+                    document.getElementById('purItemTotal').value = "0.00";
+                    resetPurItemModal();
+                }
             }
         };
 
@@ -2611,13 +2738,47 @@
             const qty = parseFloat(document.getElementById('purItemQty').value) || 0;
             const price = parseFloat(document.getElementById('purItemPrice').value) || 0;
             if(qty <= 0 || price <= 0) return alert("Qty and Price must be positive");
-            window.currentPurchaseItems.push({ name, desc: document.getElementById('purItemDesc').value || '', unit: document.getElementById('purItemUnit').value || 'Pcs', qty, price, total: (qty * price).toFixed(2) });
+            const item = { name, desc: document.getElementById('purItemDesc').value || '', unit: document.getElementById('purItemUnit').value || 'Pcs', qty, price, total: (qty * price).toFixed(2) };
+            if (editPurchaseItemIndex > -1) {
+                window.currentPurchaseItems[editPurchaseItemIndex] = item;
+                editPurchaseItemIndex = -1;
+            } else {
+                window.currentPurchaseItems.push(item);
+            }
             window.renderPurchaseItems(); window.togglePurItemModal(false);
+            resetPurItemModal();
+        };
+
+        window.editPurchaseItem = function(i) {
+            const it = window.currentPurchaseItems[i];
+            editPurchaseItemIndex = i;
+            document.getElementById('purItemModalTitle').innerText = 'Edit Purchase Item';
+            document.getElementById('purItemModalSubmitBtn').innerHTML = '<i class="fas fa-save mr-2"></i> Update Item';
+            document.getElementById('purItemModalCancelEditBtn').classList.remove('hidden');
+            document.getElementById('purProductInput').value = it.name;
+            document.getElementById('purItemDesc').value = it.desc || '';
+            document.getElementById('purItemUnit').value = it.unit || 'Pcs';
+            document.getElementById('purItemPrice').value = it.price;
+            document.getElementById('purItemQty').value = it.qty;
+            document.getElementById('purItemTotal').value = it.total;
+            document.getElementById('purItemModal').classList.remove('hidden');
+        };
+
+        window.cancelPurItemEdit = function() {
+            editPurchaseItemIndex = -1;
+            document.getElementById('purItemForm').reset();
+            document.getElementById('purProductInput').value = "";
+            document.getElementById('purItemDesc').value = "";
+            document.getElementById('purItemUnit').value = "";
+            document.getElementById('purItemPrice').value = "";
+            document.getElementById('purItemQty').value = "1";
+            document.getElementById('purItemTotal').value = "0.00";
+            resetPurItemModal();
         };
 
         window.renderPurchaseItems = function() {
             let g = 0;
-            document.getElementById('purchaseItemsBody').innerHTML = window.currentPurchaseItems.map((it, i) => { g += parseFloat(it.total); return `<tr class="border-b"><td class="p-2 sm:p-3">${i+1}</td><td class="p-2 sm:p-3"><b>${it.name}</b></td><td class="p-2 sm:p-3">${it.desc}</td><td class="p-2 sm:p-3">${it.qty}</td><td class="p-2 sm:p-3">${it.unit}</td><td class="p-2 sm:p-3">${it.price}</td><td class="p-2 sm:p-3 font-bold">${it.total}</td><td class="p-2 sm:p-3"><button onclick="removePurItem(${i})" class="text-red-400"><i class="fas fa-times"></i></button></td></tr>`; }).join('');
+            document.getElementById('purchaseItemsBody').innerHTML = window.currentPurchaseItems.map((it, i) => { g += parseFloat(it.total); return `<tr class="border-b"><td class="p-2 sm:p-3">${i+1}</td><td class="p-2 sm:p-3"><b>${it.name}</b></td><td class="p-2 sm:p-3">${it.desc}</td><td class="p-2 sm:p-3">${it.qty}</td><td class="p-2 sm:p-3">${it.unit}</td><td class="p-2 sm:p-3">${it.price}</td><td class="p-2 sm:p-3 font-bold">${it.total}</td><td class="p-2 sm:p-3 whitespace-nowrap"><button onclick="editPurchaseItem(${i})" class="item-action-btn edit mr-1" title="Edit"><i class="fas fa-pen"></i></button><button onclick="removePurItem(${i})" class="item-action-btn remove" title="Remove"><i class="fas fa-times"></i></button></td></tr>`; }).join('');
             document.getElementById('purGrandTotal').innerText = g.toFixed(2);
         };
 
@@ -2664,6 +2825,8 @@
             document.getElementById('purAddress').value = s ? s.address : "N/A";
             window.currentPurchaseItems = JSON.parse(JSON.stringify(pur.items));
             document.getElementById('savePurchaseBtn').innerText = "UPDATE PO";
+            editPurchaseItemIndex = -1;
+            resetPurItemModal();
             window.renderPurchaseItems(); window.switchPurchaseSubTab('create');
         };
 
