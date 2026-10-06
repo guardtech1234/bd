@@ -3288,13 +3288,29 @@
             doc.setFont("helvetica", "normal"); doc.text("Paid Amount:", 140, finalY + 6); doc.text(inv.paid || "0.00", 196, finalY + 6, { align: "right" });
             doc.setFont("helvetica", "bold"); doc.text("Due Amount:", 140, finalY + 12); doc.text(inv.due || "0.00", 196, finalY + 12, { align: "right" });
             let termsY = Math.max(wordsY, finalY + 18); termsY = checkPageBreak(termsY, 30);
-            doc.setFontSize(8); doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); doc.text("TERMS & CONDITIONS:", 14, termsY);
-            doc.setFont("helvetica", "normal"); const termsLines = doc.splitTextToSize(window.settings.terms_inv || "", 120); doc.text(termsLines, 14, termsY + 4);
-            let sigY = termsY + 4 + (termsLines.length * 4) + 10; sigY = checkPageBreak(sigY, 25);
-            if(window.settings.seal) { try { doc.addImage(window.settings.seal, 'PNG', 105, sigY - 3, 18, 18); } catch(e){} }
-            if(window.settings.sign) { try { doc.addImage(window.settings.sign, 'PNG', 155, sigY - 5, 30, 10); } catch(e){} }
-            doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); doc.text("Authorized Signature", 150, sigY + 10);
-            doc.setFont("helvetica", "normal"); doc.text(window.settings.signatory, 150, sigY + 14); doc.text(window.settings.designation, 150, sigY + 18);
+            
+            // --- MODIFIED: TERMS & CONDITIONS, SEAL, AUTHORIZED SIGNATURE ON SAME HORIZONTAL LEVEL ---
+            doc.setFontSize(8); doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); 
+            doc.text("TERMS & CONDITIONS:", 14, termsY);
+            doc.setFont("helvetica", "normal"); 
+            const termsLines = doc.splitTextToSize(window.settings.terms_inv || "", 100); 
+            doc.text(termsLines, 14, termsY + 4);
+            
+            // Seal in the middle (x ~ 100-120)
+            if(window.settings.seal) { 
+                try { doc.addImage(window.settings.seal, 'PNG', 105, termsY - 3, 18, 18); } catch(e){} 
+            }
+            
+            // Signature on the right (x ~ 150-196)
+            if(window.settings.sign) { 
+                try { doc.addImage(window.settings.sign, 'PNG', 155, termsY - 5, 30, 10); } catch(e){} 
+            }
+            doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); 
+            doc.text("Authorized Signature", 150, termsY + 10);
+            doc.setFont("helvetica", "normal"); 
+            doc.text(window.settings.signatory, 150, termsY + 14); 
+            doc.text(window.settings.designation, 150, termsY + 18);
+            
             doc.save(`${inv.id}_${inv.client}.pdf`);
         };
 
@@ -3307,7 +3323,6 @@
             const pageHeight = doc.internal.pageSize.height;
             let isFirstPage = true;
             const currency = quot.currency || '৳';
-            // For Unit Price column: show "BDT" for Taka, "$" for Dollar
             const unitPriceLabel = currency === '$' ? '$' : 'BDT';
 
             const drawHeaderFooter = (isWelcomePage = false, pageTitle = 'QUOTATION') => {
@@ -3357,7 +3372,6 @@
             doc.setFont("helvetica", "bold"); doc.text("Ref No:", 130, 60); doc.setFont("helvetica", "normal"); doc.text(quot.refNo || 'N/A', 160, 60);
             currentY = Math.max(currentY, 73);
             if (quot.subject) { currentY = checkPageBreak(currentY, 6); doc.setFont("helvetica", "bold"); doc.text("Subject: " + quot.subject, 14, currentY, { maxWidth: 180 }); currentY += 6; }
-            // Unit Price column shows "BDT" (small) for Taka, "$" (small) for Dollar
             const tableData = quot.items.map((item, i) => [i + 1, item.name, item.desc || 'N/A', item.qty, item.unit || 'Pcs', unitPriceLabel + ' ' + parseFloat(item.price).toFixed(2), item.total]);
             doc.autoTable({
                 startY: currentY, head: [['SL', 'Items', 'Description', 'Qty', 'Unit', 'Unit Price', 'Total']], body: tableData, theme: 'grid',
@@ -3384,13 +3398,29 @@
             }
             doc.setFont("helvetica", "bold"); doc.text("Net Total:", 140, taxY + 6); doc.text(quot.netTotal, 196, taxY + 6, { align: "right" });
             let termsY = Math.max(wordsY, taxY + 12); termsY = checkPageBreak(termsY, 30);
-            doc.setFontSize(8); doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); doc.text("TERMS & CONDITIONS:", 14, termsY);
-            doc.setFont("helvetica", "normal"); const tL = doc.splitTextToSize(window.settings.terms_quot || "", 120); doc.text(tL, 14, termsY + 4);
-            let sigY = termsY + 4 + (tL.length * 4) + 10; sigY = checkPageBreak(sigY, 25);
-            if(window.settings.seal) { try { doc.addImage(window.settings.seal, 'PNG', 105, sigY - 3, 18, 18); } catch(e){} }
-            if(window.settings.sign) { try { doc.addImage(window.settings.sign, 'PNG', 155, sigY - 5, 30, 10); } catch(e){} }
-            doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); doc.text("Authorized Signature", 150, sigY + 10);
-            doc.setFont("helvetica", "normal"); doc.text(window.settings.signatory, 150, sigY + 14); doc.text(window.settings.designation, 150, sigY + 18);
+            
+            // --- MODIFIED: TERMS & CONDITIONS, SEAL, AUTHORIZED SIGNATURE ON SAME HORIZONTAL LEVEL ---
+            doc.setFontSize(8); doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); 
+            doc.text("TERMS & CONDITIONS:", 14, termsY);
+            doc.setFont("helvetica", "normal"); 
+            const tL = doc.splitTextToSize(window.settings.terms_quot || "", 100); 
+            doc.text(tL, 14, termsY + 4);
+            
+            // Seal in the middle (x ~ 100-120)
+            if(window.settings.seal) { 
+                try { doc.addImage(window.settings.seal, 'PNG', 105, termsY - 3, 18, 18); } catch(e){} 
+            }
+            
+            // Signature on the right (x ~ 150-196)
+            if(window.settings.sign) { 
+                try { doc.addImage(window.settings.sign, 'PNG', 155, termsY - 5, 30, 10); } catch(e){} 
+            }
+            doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); 
+            doc.text("Authorized Signature", 150, termsY + 10);
+            doc.setFont("helvetica", "normal"); 
+            doc.text(window.settings.signatory, 150, termsY + 14); 
+            doc.text(window.settings.designation, 150, termsY + 18);
+            
             doc.save(`${quot.id}_${quot.client}.pdf`);
         };
 
@@ -3442,16 +3472,34 @@
             let finalY = doc.lastAutoTable.finalY + 6; finalY = checkPageBreak(finalY, 20);
             doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); doc.text("Total Items Qty:", 140, finalY); doc.text(del.totalQty, 196, finalY, { align: "right" });
             let termsY = finalY + 6; termsY = checkPageBreak(termsY, 40);
-            doc.setFontSize(8); doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); doc.text("TERMS & CONDITIONS:", 14, termsY);
-            doc.setFont("helvetica", "normal"); const tL = doc.splitTextToSize(window.settings.terms_challan || "", 120); doc.text(tL, 14, termsY + 4);
-            let receiverY = termsY + 4 + (tL.length * 4) + 6; receiverY = checkPageBreak(receiverY, 30);
+            
+            // --- MODIFIED: TERMS & CONDITIONS, SEAL, AUTHORIZED SIGNATURE ON SAME HORIZONTAL LEVEL ---
+            doc.setFontSize(8); doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); 
+            doc.text("TERMS & CONDITIONS:", 14, termsY);
+            doc.setFont("helvetica", "normal"); 
+            const tL = doc.splitTextToSize(window.settings.terms_challan || "", 100); 
+            doc.text(tL, 14, termsY + 4);
+            
+            // Seal in the middle (x ~ 100-120)
+            if(window.settings.seal) { 
+                try { doc.addImage(window.settings.seal, 'PNG', 105, termsY - 3, 18, 18); } catch(e){} 
+            }
+            
+            // Signature on the right (x ~ 150-196)
+            if(window.settings.sign) { 
+                try { doc.addImage(window.settings.sign, 'PNG', 155, termsY - 5, 30, 10); } catch(e){} 
+            }
+            doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); 
+            doc.text("Authorized Signature", 150, termsY + 10);
+            doc.setFont("helvetica", "normal"); 
+            doc.text(window.settings.signatory, 150, termsY + 14); 
+            doc.text(window.settings.designation, 150, termsY + 18);
+            
+            // Received By on left below terms
+            let receiverY = termsY + 4 + (tL.length * 4) + 6;
             doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); doc.text("Received By:", 14, receiverY);
             doc.setFont("helvetica", "normal"); doc.text("_________________________", 14, receiverY + 5); doc.text("Signature & Date", 14, receiverY + 10);
-            let sigY = receiverY + 15; sigY = checkPageBreak(sigY, 25);
-            if(window.settings.seal) { try { doc.addImage(window.settings.seal, 'PNG', 105, sigY - 3, 18, 18); } catch(e){} }
-            if(window.settings.sign) { try { doc.addImage(window.settings.sign, 'PNG', 155, sigY - 5, 30, 10); } catch(e){} }
-            doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); doc.text("Authorized Signature", 150, sigY + 10);
-            doc.setFont("helvetica", "normal"); doc.text(window.settings.signatory, 150, sigY + 14); doc.text(window.settings.designation, 150, sigY + 18);
+            
             doc.save(`${del.id}_${del.client}.pdf`);
         };
 
@@ -3504,13 +3552,29 @@
             let wordsY = finalY + 5 + (wordsLines.length * 5);
             doc.setFont("helvetica", "bold"); doc.text("Grand Total:", 140, finalY); doc.text(pur.total, 196, finalY, { align: "right" });
             let termsY = Math.max(wordsY, finalY + 18); termsY = checkPageBreak(termsY, 30);
-            doc.setFontSize(8); doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); doc.text("TERMS & CONDITIONS:", 14, termsY);
-            doc.setFont("helvetica", "normal"); const tL = doc.splitTextToSize(window.settings.terms_po || "", 120); doc.text(tL, 14, termsY + 4);
-            let sigY = termsY + 4 + (tL.length * 4) + 10; sigY = checkPageBreak(sigY, 25);
-            if(window.settings.seal) { try { doc.addImage(window.settings.seal, 'PNG', 105, sigY - 3, 18, 18); } catch(e){} }
-            if(window.settings.sign) { try { doc.addImage(window.settings.sign, 'PNG', 155, sigY - 5, 30, 10); } catch(e){} }
-            doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); doc.text("Authorized Signature", 150, sigY + 10);
-            doc.setFont("helvetica", "normal"); doc.text(window.settings.signatory, 150, sigY + 14); doc.text(window.settings.designation, 150, sigY + 18);
+            
+            // --- MODIFIED: TERMS & CONDITIONS, SEAL, AUTHORIZED SIGNATURE ON SAME HORIZONTAL LEVEL ---
+            doc.setFontSize(8); doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); 
+            doc.text("TERMS & CONDITIONS:", 14, termsY);
+            doc.setFont("helvetica", "normal"); 
+            const tL = doc.splitTextToSize(window.settings.terms_po || "", 100); 
+            doc.text(tL, 14, termsY + 4);
+            
+            // Seal in the middle (x ~ 100-120)
+            if(window.settings.seal) { 
+                try { doc.addImage(window.settings.seal, 'PNG', 105, termsY - 3, 18, 18); } catch(e){} 
+            }
+            
+            // Signature on the right (x ~ 150-196)
+            if(window.settings.sign) { 
+                try { doc.addImage(window.settings.sign, 'PNG', 155, termsY - 5, 30, 10); } catch(e){} 
+            }
+            doc.setFont("helvetica", "bold"); doc.setTextColor(0,0,0); 
+            doc.text("Authorized Signature", 150, termsY + 10);
+            doc.setFont("helvetica", "normal"); 
+            doc.text(window.settings.signatory, 150, termsY + 14); 
+            doc.text(window.settings.designation, 150, termsY + 18);
+            
             doc.save(`${pur.id}_${pur.supplier}.pdf`);
         };
 
